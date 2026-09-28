@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar Valgrind
+        run: sudo apt-get update && sudo apt-get install -y valgrind
+
+      - name: Compilar
+        run: make
+
+      - name: Testes unitários
+        run: make test
+
+      - name: Testes de integração (requisições reais)
+        run: make integration
+
+      - name: Checagem de memória (Valgrind)
+        run: make valgrind
+
+      - name: Build com sanitizers
+        run: make debug
