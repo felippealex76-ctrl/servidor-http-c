@@ -1,0 +1,8 @@
+# Build
+build/
+
+# Editores / SO
+.vscode/
+.idea/
+.DS_Store
+*.swp
